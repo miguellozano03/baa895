@@ -6,10 +6,10 @@ from app.analysis.preprocess import actuals_hourly
 
 
 def summary(df: pd.DataFrame) -> dict:
-    """Métricas globales. error = forecast - actual (positivo = sobreestimación)."""
+    """Overall metrics. error = forecast - actual (positive = overestimation)."""
     e = df["error"]
     ae = e.abs()
-    e_c = e - e.mean()  # error sin el sesgo
+    e_c = e - e.mean()  # error with the bias removed
 
     return {
         "n": int(len(e)),
@@ -29,7 +29,7 @@ def summary(df: pd.DataFrame) -> dict:
 
 
 def by_hour(df: pd.DataFrame) -> pd.DataFrame:
-    """Sesgo y MAE por hora del día (24 filas)."""
+    """Bias and MAE by hour of day (24 rows)."""
     g = df.groupby(df["startTime"].dt.hour)["error"]
     out = pd.DataFrame({"bias": g.mean(), "mae": g.apply(lambda x: x.abs().mean())})
     out.index.name = "hour"
@@ -37,8 +37,8 @@ def by_hour(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def by_horizon(fc: pd.DataFrame, actuals: pd.DataFrame) -> pd.DataFrame:
-    """Error según antelación, usando TODOS los pronósticos con horizon_h > 0
-    (no solo el vigente), para los días objetivo."""
+    """Error by lead time, using ALL forecasts with horizon_h > 0
+    (not just the active forecast), for the target days."""
     d = fc.rename(columns={"generation": "forecast"}).merge(
         actuals_hourly(actuals), on="startTime"
     )

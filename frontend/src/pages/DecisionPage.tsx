@@ -16,7 +16,7 @@ export default function DecisionPage() {
   })
 
   const forecast = useForecast(targetDate, hour)
-  const metrics = useMetrics(hour) // bias y err_p95 para las líneas derivadas
+  const metrics = useMetrics(hour) // bias and err_p95 for the derived lines
 
   return (
     <>

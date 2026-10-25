@@ -16,7 +16,7 @@ const HOURS = Array.from({ length: 24 }, (_, h) => h)
 
 export default function AppLayout() {
   const [hour, setHour] = useDecisionHour()
-  const { search } = useLocation() // conserva ?hour=9 al cambiar de página
+  const { search } = useLocation() // preserve ?hour=9 when changing pages
 
   return (
     <div className="min-h-screen bg-background text-foreground">

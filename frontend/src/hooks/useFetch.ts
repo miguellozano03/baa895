@@ -30,7 +30,7 @@ export function useFetch<T>(
         setState({ data, isLoading: false, isError: false, error: undefined }),
       )
       .catch((err: Error) => {
-        if (err.name === "AbortError") return // petición cancelada: se ignora
+        if (err.name === "AbortError") return // Ignore cancelled requests
         setState({ data: undefined, isLoading: false, isError: true, error: err })
       })
 

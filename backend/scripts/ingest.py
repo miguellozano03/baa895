@@ -1,4 +1,4 @@
-"""Descarga de Elexon y guardado en data/. Se corre una vez: python -m scripts.ingest"""
+"""Download data from Elexon and save it to data/. Run once: python -m scripts.ingest."""
 import logging
 
 from app.config import (

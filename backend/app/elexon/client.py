@@ -4,7 +4,7 @@ import requests
 BASE_URL = "https://data.elexon.co.uk/bmrs/api/v1/datasets"
 
 def get_actuals(start: str, end: str) -> pd.DataFrame:
-    """Generación eólica real (FUELHH, fuelType=WIND). Fechas 'YYYY-MM-DD'."""
+    """Actual wind generation (FUELHH, fuelType=WIND). Dates: 'YYYY-MM-DD'."""
     r = requests.get(
         f"{BASE_URL}/FUELHH/stream",
         params={
@@ -22,7 +22,7 @@ def get_actuals(start: str, end: str) -> pd.DataFrame:
 
 
 def get_forecasts(start: str, end: str) -> pd.DataFrame:
-    """Pronósticos eólicos (WINDFOR). Fechas ISO, ej. '2025-12-20T00:00Z'."""
+    """Wind forecasts (WINDFOR). ISO dates, e.g. '2025-12-20T00:00Z'."""
     r = requests.get(
         f"{BASE_URL}/WINDFOR/stream",
         params={
