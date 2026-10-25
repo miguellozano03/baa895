@@ -10,6 +10,7 @@ pyarrow
 
 # HTTP client
 httpx
+requests
 
 # Validation and configuration
 pydantic
